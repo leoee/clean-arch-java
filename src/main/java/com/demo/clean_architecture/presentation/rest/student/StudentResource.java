@@ -26,7 +26,6 @@ public class StudentResource {
 
   @RequestMapping(value = "/student", method = RequestMethod.POST)
   ResponseEntity<?> createStudent(@RequestBody StudentRequest studentRequest) {
-    System.out.println("teste");
 
     return new ResponseEntity<>(this.student.addStudent(StudentInputMapper.map(studentRequest)), HttpStatus.CREATED);
   }

@@ -4,10 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.demo.clean_architecture.domain.Student;
 
 @Entity
+@Table(name = "student")
 public class StudentDto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

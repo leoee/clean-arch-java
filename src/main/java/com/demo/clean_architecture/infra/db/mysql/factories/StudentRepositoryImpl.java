@@ -19,7 +19,6 @@ public class StudentRepositoryImpl implements AddStudentRepository{
 
   @Override
   public Student add(Student student) {
-    System.out.println("chegou");
     StudentDto studentDto = studentRepository.save(StudentDto.from(student));
     return StudentDto.to(studentDto);
   }
