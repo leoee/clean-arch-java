@@ -10,7 +10,7 @@ public class AddStudent {
   public AddStudent(AddStudentRepository addStudentRepository) {
     this.addStudentRepository = addStudentRepository;
   }
-  
+
   public Student addStudent(Student student){
     return addStudentRepository.addStudent(student);
   }
