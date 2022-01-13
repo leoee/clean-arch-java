@@ -12,7 +12,6 @@ public class AddStudent {
   }
   
   public Student addStudent(Student student){
-
-    return addStudentRepository.add(student);
+    return addStudentRepository.addStudent(student);
   }
 }

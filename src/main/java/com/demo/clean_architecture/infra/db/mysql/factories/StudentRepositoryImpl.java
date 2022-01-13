@@ -4,12 +4,13 @@ import com.demo.clean_architecture.domain.Student;
 import com.demo.clean_architecture.infra.db.mysql.entities.StudentDto;
 import com.demo.clean_architecture.infra.db.mysql.repositories.StudentRepository;
 import com.demo.clean_architecture.usecases.protocols.db.AddStudentRepository;
+import com.demo.clean_architecture.usecases.protocols.db.GetStudentRepository;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class StudentRepositoryImpl implements AddStudentRepository{
+public class StudentRepositoryImpl implements AddStudentRepository, GetStudentRepository{
 
   private StudentRepository studentRepository;
 
@@ -18,9 +19,13 @@ public class StudentRepositoryImpl implements AddStudentRepository{
   }
 
   @Override
-  public Student add(Student student) {
-    StudentDto studentDto = studentRepository.save(StudentDto.from(student));
-    return StudentDto.to(studentDto);
+  public Student addStudent(Student student) {
+    return StudentDto.to(studentRepository.save(StudentDto.from(student)));
+  }
+
+  @Override
+  public Student getStudent(Long id) {
+    return StudentDto.to(studentRepository.getById(id));
   }
   
 }
