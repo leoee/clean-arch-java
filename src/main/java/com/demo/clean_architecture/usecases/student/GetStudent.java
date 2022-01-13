@@ -10,7 +10,7 @@ public class GetStudent {
     this.getStudentRepository = getStudentRepository;
   }
 
-  public Student get(Long id) {
+  public Student getStudent(Long id) {
     return this.getStudentRepository.getStudent(id);
   }
 }

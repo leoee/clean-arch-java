@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StudentResource {
 
-  private AddStudent addStudent;
-  private GetStudent getStudent;
+  private AddStudent addStudentUseCase;
+  private GetStudent getStudentUseCase;
 
   public StudentResource(AddStudent addStudent, GetStudent getStudent) {
-    this.addStudent = addStudent;
-    this.getStudent = getStudent;
+    this.addStudentUseCase = addStudent;
+    this.getStudentUseCase = getStudent;
   }
 
 
   @RequestMapping(value = "/student", method = RequestMethod.POST)
   ResponseEntity<?> createStudent(@RequestBody StudentRequest studentRequest) {
 
-    return new ResponseEntity<>(this.addStudent.addStudent(StudentInputMapper.map(studentRequest)), HttpStatus.CREATED);
+    return new ResponseEntity<>(this.addStudentUseCase.addStudent(StudentInputMapper.map(studentRequest)), HttpStatus.CREATED);
   }
 
   @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
   ResponseEntity<?> getStudent(@PathVariable Long id) {
 
-    return new ResponseEntity<>(this.getStudent.get(id), HttpStatus.CREATED);
+    return new ResponseEntity<>(this.getStudentUseCase.getStudent(id), HttpStatus.CREATED);
   }
 
 }
