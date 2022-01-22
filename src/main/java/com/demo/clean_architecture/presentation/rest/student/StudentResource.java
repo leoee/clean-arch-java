@@ -27,13 +27,13 @@ public class StudentResource {
   }
 
 
-  @RequestMapping(value = "/student", method = RequestMethod.POST)
+  @RequestMapping(value = "/students", method = RequestMethod.POST)
   ResponseEntity<?> createStudent(@RequestBody StudentRequest studentRequest) {
 
     return new ResponseEntity<>(this.addStudentUseCase.addStudent(StudentInputMapper.map(studentRequest)), HttpStatus.CREATED);
   }
 
-  @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
+  @RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
   ResponseEntity<?> getStudent(@PathVariable Long id) {
 
     return new ResponseEntity<>(this.getStudentUseCase.getStudent(id), HttpStatus.CREATED);
