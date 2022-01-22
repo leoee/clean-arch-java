@@ -26,10 +26,12 @@ public class GetStudentTest {
   public void shouldReturnStudentWhenPassingValidId() {
     Long expectedId = (long) 1234;
     String expectedName = "expectedName";
+    String expectedCourse = "expectedCourse";
 
     Student expectedStudent = new Student();
     expectedStudent.setId(expectedId);
     expectedStudent.setName(expectedName);
+    expectedStudent.setCourse(expectedCourse);
 
     when(getStudentRepository.getStudent(expectedId)).thenReturn(expectedStudent);
 
@@ -38,5 +40,6 @@ public class GetStudentTest {
     assertNotNull(fetchedStudent);
     assertEquals(expectedId, fetchedStudent.getId());
     assertEquals(expectedName, fetchedStudent.getName());
+    assertEquals(expectedCourse, fetchedStudent.getCourse());
   }
 }

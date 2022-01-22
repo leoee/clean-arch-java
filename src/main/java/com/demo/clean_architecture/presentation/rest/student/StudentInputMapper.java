@@ -10,6 +10,8 @@ public final class StudentInputMapper {
     Student student = new Student();
     student.setId(request.getId());
     student.setName(request.getName());
+    student.setCourse(request.getCourse());
+    student.setEmail(request.getEmail());
 
     return student;
   }

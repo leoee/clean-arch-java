@@ -26,8 +26,10 @@ public class StudentResourceTest {
   @Test
   public void shouldCreateStudentWhenPassingValidBody() {
     final String name = "Testing";
+    final String course = "Engineering";
     StudentDto studentDto = new StudentDto();
     studentDto.setName(name);
+    studentDto.setCourse(name);
 
     HttpEntity<StudentDto> httpEntity = new HttpEntity<>(studentDto);
 
@@ -36,6 +38,7 @@ public class StudentResourceTest {
 
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertEquals(name, response.getBody().getName());
+    assertEquals(course, response.getBody().getCourse());
     assertNotNull(response.getBody().getId());
 
   }

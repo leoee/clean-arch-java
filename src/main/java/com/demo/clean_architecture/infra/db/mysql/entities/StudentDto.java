@@ -16,6 +16,8 @@ public class StudentDto {
   private Long id;
 
   private String name;
+  private String course;
+  private String email;
 
   public Long getId() {
     return this.id;
@@ -33,10 +35,28 @@ public class StudentDto {
     this.name = name;
   }
 
+  public String getCourse() {
+    return this.course;
+  }
+
+  public void setCourse(String course) {
+    this.course = course;
+  };
+
+  public String getEmail() {
+    return this.email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  };
+
   public static StudentDto from(Student student) {
     StudentDto studentDto = new StudentDto();
     studentDto.setId(student.getId());
     studentDto.setName(student.getName());
+    studentDto.setCourse(student.getCourse());
+    studentDto.setEmail(student.getEmail());
 
     return studentDto;
   }
@@ -45,6 +65,8 @@ public class StudentDto {
     Student student = new Student();
     student.setId(studentDto.getId());
     student.setName(studentDto.getName());
+    student.setCourse(studentDto.getCourse());
+    student.setEmail(studentDto.getEmail());
 
     return student;
   }
