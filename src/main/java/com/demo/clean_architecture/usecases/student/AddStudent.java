@@ -2,6 +2,7 @@ package com.demo.clean_architecture.usecases.student;
 
 import com.demo.clean_architecture.domain.Student;
 import com.demo.clean_architecture.domain.exceptions.DuplicatedEmailException;
+import com.demo.clean_architecture.domain.exceptions.InternalErrorException;
 import com.demo.clean_architecture.usecases.protocols.db.AddStudentRepository;
 import com.demo.clean_architecture.usecases.protocols.db.GetStudentByEmailRepository;
 
@@ -19,7 +20,12 @@ public class AddStudent {
     if (getStudentByEmailRepository.getStudentByEmail(student.getEmail()) != null) {
       throw new DuplicatedEmailException("Email is already in use.");
     }
-
-    return addStudentRepository.addStudent(student);
+    try {
+      Student createdStudent = addStudentRepository.addStudent(student);
+      return createdStudent;
+    } catch (Exception e) {
+      throw new InternalErrorException(e.getMessage());
+    }
+     
   }
 }
