@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.demo.clean_architecture.domain.Student;
 import com.demo.clean_architecture.infra.db.mysql.entities.StudentDto;
+import com.demo.clean_architecture.presentation.rest.entities.StudentRequest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,14 @@ public class StudentResourceTest {
   public void shouldCreateStudentWhenPassingValidBody() {
     final String name = "Testing";
     final String course = "Engineering";
-    StudentDto studentDto = new StudentDto();
-    studentDto.setName(name);
-    studentDto.setCourse(name);
+    final String email = "test@mail.com";
 
-    HttpEntity<StudentDto> httpEntity = new HttpEntity<>(studentDto);
+    StudentRequest request = new StudentRequest();
+    request.setName(name);
+    request.setCourse(course);
+    request.setEmail(email);
+
+    HttpEntity<StudentRequest> httpEntity = new HttpEntity<>(request);
 
     ResponseEntity<StudentDto> response = this.testRestTemplate
         .exchange("/students", HttpMethod.POST, httpEntity, StudentDto.class);
@@ -39,8 +43,60 @@ public class StudentResourceTest {
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     assertEquals(name, response.getBody().getName());
     assertEquals(course, response.getBody().getCourse());
+    assertEquals(email, response.getBody().getEmail());
     assertNotNull(response.getBody().getId());
 
+  }
+
+  @Test
+  public void shouldReturnBadrequestWhenCreatingWithoutEmail() {
+    final String name = "Testing";
+    final String course = "Engineering";
+
+    StudentRequest request = new StudentRequest();
+    request.setName(name);
+    request.setCourse(course);
+
+    HttpEntity<StudentRequest> httpEntity = new HttpEntity<>(request);
+
+    ResponseEntity<StudentDto> response = this.testRestTemplate
+        .exchange("/students", HttpMethod.POST, httpEntity, StudentDto.class);
+
+    assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+  }
+
+  @Test
+  public void shouldReturnBadrequestWhenCreatingWithoutName() {
+    final String course = "Engineering";
+    final String email = "test@mail.com";
+
+    StudentRequest request = new StudentRequest();
+    request.setCourse(course);
+    request.setEmail(email);
+
+    HttpEntity<StudentRequest> httpEntity = new HttpEntity<>(request);
+
+    ResponseEntity<StudentDto> response = this.testRestTemplate
+        .exchange("/students", HttpMethod.POST, httpEntity, StudentDto.class);
+
+    assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+  }
+
+  @Test
+  public void shouldReturnBadrequestWhenCreatingWithoutCourse() {
+    final String name = "Testing";
+    final String email = "test@mail.com";
+
+    StudentRequest request = new StudentRequest();
+    request.setName(name);
+    request.setEmail(email);
+
+    HttpEntity<StudentRequest> httpEntity = new HttpEntity<>(request);
+
+    ResponseEntity<StudentDto> response = this.testRestTemplate
+        .exchange("/students", HttpMethod.POST, httpEntity, StudentDto.class);
+
+    assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
   }
 
   @Test
@@ -51,12 +107,4 @@ public class StudentResourceTest {
 
     assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
   }
-
-  /*@Test
-  public void shouldReturnNotFoundWhenGettingByValidId() {
-    ResponseEntity<Student> response = this.testRestTemplate
-            .exchange("/students/" + Long.toString(createdStudentId), HttpMethod.GET, null, Student.class);
-
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-  }*/
 }
