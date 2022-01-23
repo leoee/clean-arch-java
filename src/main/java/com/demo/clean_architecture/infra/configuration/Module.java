@@ -1,4 +1,4 @@
-package com.demo.clean_architecture.presentation.configuration;
+package com.demo.clean_architecture.infra.configuration;
 
 import com.demo.clean_architecture.usecases.protocols.db.AddStudentRepository;
 import com.demo.clean_architecture.usecases.protocols.db.GetStudentByEmailRepository;

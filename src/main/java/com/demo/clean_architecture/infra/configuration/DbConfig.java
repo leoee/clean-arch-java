@@ -1,4 +1,4 @@
-package com.demo.clean_architecture.presentation.configuration;
+package com.demo.clean_architecture.infra.configuration;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
