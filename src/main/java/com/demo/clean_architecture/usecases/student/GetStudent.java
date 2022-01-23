@@ -16,7 +16,7 @@ public class GetStudent {
       Student fetchedStudent = this.getStudentRepository.getStudent(id);
       return fetchedStudent;
     } catch (Exception e) {
-      throw new NotFoundException(("Could not find object with id " + id));
+      throw new NotFoundException(("Could not find object with id " + id + "."));
     }
   }
 }
