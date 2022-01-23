@@ -1,9 +1,21 @@
 package com.demo.clean_architecture.presentation.rest.entities;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
+
 public class StudentRequest {
+  @Null(message = "Id must be null")
   private Long id;
+
+  @NotBlank(message = "Name is required")
   private String name;
+
+  @NotBlank(message = "Course is required")
   private String course;
+
+  @NotBlank(message = "Email is required")
+  @Email(message = "Email is not a valid email")
   private String email;
 
   public Long getId() {

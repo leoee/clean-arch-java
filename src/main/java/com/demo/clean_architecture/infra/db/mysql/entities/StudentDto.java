@@ -18,9 +18,12 @@ public class StudentDto {
 
   @Column(nullable = false)
   private String name;
+
   @Column(nullable = false)
   private String course;
+
   @Column(unique = true, nullable = false)
+
   private String email;
 
   public Long getId() {

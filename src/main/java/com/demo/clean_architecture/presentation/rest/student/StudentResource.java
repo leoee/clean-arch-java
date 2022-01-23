@@ -1,6 +1,8 @@
 package com.demo.clean_architecture.presentation.rest.student;
 
 
+import javax.validation.Valid;
+
 import com.demo.clean_architecture.presentation.rest.entities.StudentRequest;
 import com.demo.clean_architecture.usecases.student.AddStudent;
 import com.demo.clean_architecture.usecases.student.GetStudent;
@@ -28,7 +30,7 @@ public class StudentResource {
 
 
   @RequestMapping(value = "/students", method = RequestMethod.POST)
-  ResponseEntity<?> createStudent(@RequestBody StudentRequest studentRequest) {
+  ResponseEntity<?> createStudent(@Valid @RequestBody StudentRequest studentRequest) {
 
     return new ResponseEntity<>(this.addStudentUseCase.addStudent(StudentInputMapper.map(studentRequest)), HttpStatus.CREATED);
   }
